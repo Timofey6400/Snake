@@ -1,4 +1,3 @@
-#Імпорт
 import pygame
 import time
 import random
@@ -17,15 +16,14 @@ dis_width = 1000
 dis_height = 600
 dis = pygame.display.set_mode((dis_width, dis_height))
 
-pygame.display.set_caption('Змейка')
+pygame.display.set_caption('Snake Game')
 clock = pygame.time.Clock()
 snake_block = 10
 snake_speed = 12.5
-font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
  
 def Your_score(score):
-   value = score_font.render("Рахунок: " + str(score), True, yellow)
+   value = score_font.render("Score: " + str(score), True, yellow)
    dis.blit(value, [0, 0])
 
 def our_snake(snake_block, snake_list):
@@ -33,7 +31,7 @@ def our_snake(snake_block, snake_list):
        pygame.draw.rect(dis, green, [x[0], x[1], snake_block, snake_block])
  
 def message(msg, color):
-   mesg = font_style.render(msg, True, color)
+   mesg = score_font.render(msg, True, color)
    dis.blit(mesg, [dis_width / 6, dis_height / 3])
 def gameLoop():
    game_over = False
@@ -49,7 +47,7 @@ def gameLoop():
    while not game_over:
        while game_close == True:
            dis.fill(blue)
-           message("Ви програли! Натисніть 'Esc' для вихіду або 'R' для повторної гри.", white)
+           message("You Lost! Press 'Esc' to exit or 'R' to play again.", white)
            Your_score(Length_of_snake - 1)
            pygame.display.update()
            for event in pygame.event.get():
@@ -63,7 +61,7 @@ def gameLoop():
            if event.type == pygame.QUIT:
                game_over = True
            if event.type == pygame.KEYDOWN:
-               if event.key == pygame.K_LEFT: #Управление стрелочками
+               if event.key == pygame.K_LEFT: # Arrows keys control
                    x1_change = -snake_block
                    y1_change = 0
                elif event.key == pygame.K_RIGHT:
@@ -75,7 +73,7 @@ def gameLoop():
                elif event.key == pygame.K_DOWN:
                    y1_change = snake_block
                    x1_change = 0
-               elif event.key == pygame.K_a: #Управление буквами
+               elif event.key == pygame.K_a: # WASD control
                    x1_change = -snake_block
                    y1_change = 0
                elif event.key == pygame.K_d:
